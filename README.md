@@ -2,6 +2,15 @@
 
 Integrationstjänst som hämtar vattentemperaturprognoser (från Copernicus) via Havs- och vattenmyndighetens API och transformerar till LwM2M/SenML-format.
 
+## Tekniska specifikationer
+
+- **Språk:** Go 1.25
+- **Körning:** Kubernetes CronJob
+- **Datakälla:** Havs- och vattenmyndighetens API (Copernicus Marine Data)
+- **Utdataformat:** SenML+JSON (RFC 8428)
+- **LwM2M-modell:** Temperature (Object ID 3303)
+- **Loggning & Observability:** OpenTelemetry via [github.com/diwise/service-chassis](https://github.com/diwise/service-chassis)
+
 ## Översikt
 
 Tjänsten körs som ett Kubernetes CronJob och utför följande:
@@ -158,6 +167,14 @@ Temperaturdata transformeras till LwM2M Temperature Object (3303):
 
 ```bash
 NUTS_CODES=SE0A21480000004452 LWM2M_ENDPOINT_URL=http://localhost:8080/api/v0/messages/lwm2m go run ./cmd/integration-havochvatten
+```
+
+### Testläge
+
+Kör med en lokal mock-server som skriver ut mottagna SenML-paket:
+
+```bash
+NUTS_CODES=SE0A21480000004452 go run ./cmd/integration-havochvatten --test
 ```
 
 ### Docker
