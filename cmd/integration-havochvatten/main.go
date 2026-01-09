@@ -46,6 +46,7 @@ func main() {
 
 	if len(cfg.NutsCodes) == 0 {
 		logger.Error("no NUTS codes configured")
+		time.Sleep(200 * time.Millisecond)
 		os.Exit(1)
 	}
 
@@ -154,9 +155,12 @@ func main() {
 			}
 			sentCount++
 		}
+		
+		time.Sleep(200 * time.Millisecond)
 	}
 
 	logger.Info("integration completed successfully", "sentCount", sentCount)
+	time.Sleep(200 * time.Millisecond)
 }
 
 // filterForecastsByTime filters forecasts based on current hour
@@ -176,10 +180,11 @@ func filterForecastsByTime(forecasts []models.WaterTempForecast, currentHour int
 			filtered = append(filtered, f)
 		}
 	}
+
 	return filtered
 }
 
-var tracer = otel.Tracer("integration-havochvatten/lwm2m")
+var tracer = otel.Tracer("integration-havochvatten")
 
 // postSenMLPack sends a SenML pack to the IoT Agent via HTTP POST
 func postSenMLPack(ctx context.Context, client *http.Client, url string, pack senmlpkg.Pack) error {
@@ -200,7 +205,7 @@ func postSenMLPack(ctx context.Context, client *http.Client, url string, pack se
 		return err
 	}
 
-	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Content-Type", senmlpkg.MediaTypeSenmlJSON)
 
 	resp, err := client.Do(req)
 	if err != nil {
