@@ -26,7 +26,7 @@ import (
 )
 
 const (
-	serviceName string = "integration-cip-havochvatten"
+	serviceName string = "integration-havochvatten"
 )
 
 func main() {

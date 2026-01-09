@@ -80,12 +80,13 @@ func TransformBathingWaterForecastToSenML(nutsCode string, forecast models.Bathi
 		if err != nil {
 			return nil, err
 		}
+		if pack == nil {
+			continue
+		}
 		if err := pack.Validate(); err != nil {
 			return nil, err
 		}
-		if pack != nil {
-			packs = append(packs, pack)
-		}
+		packs = append(packs, pack)
 	}
 
 	return packs, nil

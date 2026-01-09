@@ -1,4 +1,4 @@
-# Integration Havochvatten
+# Integration med Hav och Vatten myndighetens badplats API
 
 Integrationstjänst som hämtar vattentemperaturprognoser (från Copernicus) via Havs- och vattenmyndighetens API och transformerar till LwM2M/SenML-format.
 
@@ -49,8 +49,8 @@ Tjänsten körs som ett Kubernetes CronJob och utför följande:
 │                 ▼                                                   │
 │  ┌─────────────────────────────────┐                                │
 │  │         HTTP POST               │                                │
-│  │  Content-Type: application/json │──────▶ IoT Agent              │
-│  │  LWM2M_ENDPOINT_URL             │       /api/v0/messages/lwm2m  │
+│  │  Content-Type: application/json │──────▶ IoT Agent               │
+│  │  LWM2M_ENDPOINT_URL             │       /api/v0/messages/lwm2m   │
 │  └─────────────────────────────────┘                                │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
