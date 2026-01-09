@@ -172,7 +172,7 @@ NUTS_CODES=SE0A21480000004452 LWM2M_ENDPOINT_URL=http://localhost:8080/api/v0/me
 Kör med en lokal mock-server som skriver ut mottagna SenML-paket:
 
 ```bash
-NUTS_CODES=SE0A21480000004452 go run ./cmd/integration-havochvatten --test
+NUTS_CODES=SE0A21480000004452 go run ./cmd/integration-havochvatten -test=true
 ```
 
 ### Docker
