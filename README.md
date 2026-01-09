@@ -56,11 +56,11 @@ Tjänsten körs som ett Kubernetes CronJob och utför följande:
 │  └─────────────────────────────────┘                                │
 │                 │                                                   │
 │                 ▼                                                   │
-│  ┌─────────────────────────────────┐                                │
-│  │         HTTP POST               │                                │
-│  │  Content-Type: application/json │──────▶ IoT Agent               │
-│  │  LWM2M_ENDPOINT_URL             │       /api/v0/messages/lwm2m   │
-│  └─────────────────────────────────┘                                │
+│  ┌───────────────────────────────────────┐                          │
+│  │         HTTP POST                     │                          │
+│  │  Content-Type: application/senml+json │──────▶ IoT Agent         │
+│  │  LWM2M_ENDPOINT_URL                   │       /messages/lwm2m    │
+│  └───────────────────────────────────────┘                          │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
