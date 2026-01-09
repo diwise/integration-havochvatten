@@ -37,8 +37,8 @@ func Load() (*Config, error) {
 	// Load NUTS codes from environment variable
 	nutsCodesEnv := os.Getenv("NUTS_CODES")
 	if nutsCodesEnv != "" {
-		codes := strings.Split(nutsCodesEnv, ",")
-		for _, code := range codes {
+		codes := strings.SplitSeq(nutsCodesEnv, ",")
+		for code := range codes {
 			trimmed := strings.TrimSpace(code)
 			if trimmed != "" {
 				cfg.NutsCodes = append(cfg.NutsCodes, trimmed)

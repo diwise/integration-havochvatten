@@ -7,9 +7,11 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"iter"
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"slices"
 	"strconv"
 	"time"
 
@@ -170,18 +172,24 @@ func filterForecastsByTime(forecasts []models.WaterTempForecast, currentHour int
 		return forecasts
 	}
 
-	var filtered []models.WaterTempForecast
-	for _, f := range forecasts {
-		hour, err := strconv.Atoi(f.MeasHour)
-		if err != nil {
-			continue
-		}
-		if hour <= currentHour {
-			filtered = append(filtered, f)
+	return slices.Collect(filterByHour(forecasts, currentHour))
+}
+
+// filterByHour returns an iterator that yields forecasts for hours <= currentHour
+func filterByHour(forecasts []models.WaterTempForecast, currentHour int) iter.Seq[models.WaterTempForecast] {
+	return func(yield func(models.WaterTempForecast) bool) {
+		for _, f := range forecasts {
+			hour, err := strconv.Atoi(f.MeasHour)
+			if err != nil {
+				continue
+			}
+			if hour <= currentHour {
+				if !yield(f) {
+					return
+				}
+			}
 		}
 	}
-
-	return filtered
 }
 
 var tracer = otel.Tracer("integration-havochvatten")
