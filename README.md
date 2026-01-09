@@ -145,9 +145,7 @@ Temperaturdata transformeras till LwM2M Temperature Object (3303):
 │   └── senml/
 │       └── transform.go     # SenML+JSON transformering
 ├── deployments/
-│   ├── Dockerfile           # Multi-stage Docker build
-│   └── k8s/
-│       └── cronjob.yaml     # Kubernetes CronJob manifest
+│   └── Dockerfile           # Multi-stage Docker build
 └── api/
     └── swagger.yaml         # OpenAPI-spec för Havochvatten API
 ```
