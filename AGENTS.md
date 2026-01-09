@@ -85,7 +85,7 @@ Motivering: Miljövariabler är enklast att hantera i Kubernetes CronJobs via Co
 ## API-källa
 
 Havs- och vattenmyndigheten tillhandahåller API för badvatteninformation:
-- Bas-URL: `https://badplatsen.havochvatten.se/badplatsen/api/`
+- Bas-URL: `https://gw.havochvatten.se/external-public/bathing-waters/v2`
 
 ## Projektstruktur
 
@@ -106,9 +106,7 @@ Projektet följer [Standard Go Project Layout](https://github.com/golang-standar
 ├── api/                      # API-definitioner (OpenAPI, Protobuf etc.)
 ├── configs/                  # Konfigurationsmallar
 ├── deployments/              # Kubernetes, Docker Compose etc.
-│   ├── Dockerfile
-│   └── k8s/
-│       └── cronjob.yaml      # Kubernetes CronJob-manifest
+│   └── Dockerfile
 ├── scripts/                  # Bygg- och hjälpskript
 ├── build/                    # Packaging och CI
 ├── go.mod
@@ -119,14 +117,12 @@ Projektet följer [Standard Go Project Layout](https://github.com/golang-standar
 
 | Katalog | Beskrivning |
 |---------|-------------|
+| `.vscode/` | VSCode konfiguration |
 | `cmd/` | Huvudapplikationer. Varje underkatalog är en separat körbar fil. |
 | `internal/` | Privat kod som inte kan importeras av andra projekt. |
 | `pkg/` | Bibliotekskod avsedd för återanvändning i andra projekt. |
 | `api/` | API-specifikationer och kontraktdefinitioner. |
-| `configs/` | Standardkonfigurationer och mallar. |
 | `deployments/` | IaaS, PaaS, container-orchestration (Kubernetes, Docker Compose). |
-| `scripts/` | Skript för bygg, installation, analys etc. |
-| `build/` | Dockerfile och CI-konfiguration. |
 
 ## Utveckling
 
