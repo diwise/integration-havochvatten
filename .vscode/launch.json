@@ -9,7 +9,7 @@
             "program": "${workspaceFolder}/cmd/integration-havochvatten",
             "env": {
                 "HOV_BADPLATSEN_URL": "https://gw-test.havochvatten.se/external-public/bathing-waters/v2",
-                "NUTS_CODES": "SE0441264000000306",
+                "NUTS_CODES": "SE0441264000000306,SE0A11381000000183,SE0110120000004474",
                 "INCLUDE_FUTURE_FORECASTS": "false",
                 "LWM2M_ENDPOINT_URL": "http://localhost:8080/api/v0/messages/lwm2m"
             },

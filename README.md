@@ -167,12 +167,6 @@ docker build -f deployments/Dockerfile -t integration-havochvatten:latest .
 docker run -e NUTS_CODES=SE0A21480000004452 -e LWM2M_ENDPOINT_URL=http://iot-agent:8080/api/v0/messages/lwm2m integration-havochvatten:latest
 ```
 
-### Kubernetes
-
-```bash
-kubectl apply -f deployments/k8s/cronjob.yaml
-```
-
 ## Beroenden
 
 - [github.com/diwise/senml](https://github.com/diwise/senml) - SenML-serialisering enligt RFC 8428

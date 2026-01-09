@@ -40,7 +40,7 @@ func main() {
 
 	cfg, err := config.Load()
 	if err != nil {
-		logger.Error("failed to load config", "error", err)
+		logger.Error("failed to load config", "err", err.Error())
 		os.Exit(1)
 	}
 
@@ -55,7 +55,7 @@ func main() {
 		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			body, err := io.ReadAll(r.Body)
 			if err != nil {
-				logger.Error("test server: failed to read body", "error", err)
+				logger.Error("test server: failed to read body", "err", err.Error())
 				w.WriteHeader(http.StatusInternalServerError)
 				return
 			}
@@ -63,7 +63,7 @@ func main() {
 
 			var data any
 			if err := json.Unmarshal(body, &data); err != nil {
-				logger.Error("test server: failed to unmarshal JSON", "error", err)
+				logger.Error("test server: failed to unmarshal JSON", "err", err.Error())
 				w.WriteHeader(http.StatusBadRequest)
 				return
 			}
@@ -105,7 +105,7 @@ func main() {
 		if err != nil {
 			logger.Error("failed to fetch forecast",
 				"bathingWaterId", bathingWaterID,
-				"error", err,
+				"err", err.Error(),
 			)
 			continue
 		}
@@ -136,7 +136,7 @@ func main() {
 			if err != nil {
 				logger.Error("failed to transform forecast",
 					"bathingWaterId", bathingWaterID,
-					"error", err,
+					"err", err.Error(),
 				)
 				continue
 			}
@@ -149,13 +149,13 @@ func main() {
 				logger.Error("failed to post SenML pack",
 					"bathingWaterId", bathingWaterID,
 					"measHour", wf.MeasHour,
-					"error", err,
+					"err", err.Error(),
 				)
 				continue
 			}
 			sentCount++
 		}
-		
+
 		time.Sleep(200 * time.Millisecond)
 	}
 

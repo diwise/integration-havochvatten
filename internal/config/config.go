@@ -6,10 +6,7 @@ import (
 )
 
 const (
-	DefaultBaseURL = "https://gw.havochvatten.se/external-public/bathing-waters/v2"
-)
-
-const (
+	DefaultBaseURL     = "https://gw.havochvatten.se/external-public/bathing-waters/v2"
 	DefaultIotAgentURL = "http://iot-agent/api/v0/messages/lwm2m"
 )
 

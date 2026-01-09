@@ -4,6 +4,7 @@
 
 - **Dokumentation:** Uppdatera alltid README.md vid förändringar som påverkar arkitektur, API-anrop, konfiguration eller dataflöde.
 - **Loggning:** Använd `github.com/diwise/service-chassis/pkg/infrastructure/o11y` för logging med OpenTelemetry-integration.
+- **Loggning av fel:** Vid loggning av errors, använd alltid `"err", err.Error()` som parameter. Exempel: `logger.Error("failed to do something", "err", err.Error())`
 - **Projektstruktur:** Följ Standard Go Project Layout.
 
 ## Projektbeskrivning
