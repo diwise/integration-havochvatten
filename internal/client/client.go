@@ -1,9 +1,11 @@
 package client
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"time"
 
@@ -76,8 +78,20 @@ func (c *Client) GetForecastByBathingWaterID(ctx context.Context, bathingWaterID
 		return nil, fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 	}
 
+	b, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("reading response body: %w", err)
+	}
+
+	if len(b) == 0 || bytes.Equal(b, []byte("[]")) {
+		return nil, nil
+	}
+
+	r := io.NopCloser(bytes.NewReader(b))
+	defer r.Close()
+
 	var response models.ForecastsResponse
-	if err := json.NewDecoder(resp.Body).Decode(&response); err != nil {
+	if err := json.NewDecoder(r).Decode(&response); err != nil {
 		return nil, fmt.Errorf("decoding response: %w", err)
 	}
 
